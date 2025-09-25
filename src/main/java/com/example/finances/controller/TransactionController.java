@@ -16,22 +16,22 @@ public class TransactionController {
         this.transactionService = transactionService;
         this.modelMapper = modelMapper;
     }
-    @GetMapping("/trasations/{id}")
+    @GetMapping("/transactions/{id}")
     public Transaction getTrasation(@PathVariable Long id){
         Transaction transaction = transactionService.getTrasationById(id);
         return transaction;
     }
-    @PostMapping("/trasations")
+    @PostMapping("/transactions")
     public Transaction createTrasation(@RequestBody TransactionDto transactionDto){
         Transaction transaction = convertToEntity(transactionDto);
         return transactionService.create(transaction);
     }
-    @PutMapping("/trasations/{id}")
+    @PutMapping("/transactions/{id}")
     public Transaction updateTrasation(@PathVariable Long id, @RequestBody TransactionDto transactionDto){
         Transaction transaction = convertToEntity(transactionDto);
         return transactionService.update(id, transaction);
     }
-    @DeleteMapping("/trasations/{id}")
+    @DeleteMapping("/transactions/{id}")
     public void deleteTrasation(@PathVariable Long id){
         transactionService.delete(id);
     }
