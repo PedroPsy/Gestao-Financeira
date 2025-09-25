@@ -1,9 +1,6 @@
 package com.example.finances.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -11,12 +8,14 @@ import java.time.LocalDateTime;
 public class Trasation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long transationId;
     private String description;
     private Double value;
     private LocalDateTime date;
     private Enum type;
-    private Long userId;
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
     private Long categoryId;
 
     public Trasation() {
@@ -24,7 +23,7 @@ public class Trasation {
     }
 
     public Long getId() {
-        return id;
+        return transationId;
     }
 
     public Long getCategoryId() {
@@ -36,7 +35,7 @@ public class Trasation {
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.transationId = id;
     }
 
     public String getDescription() {
@@ -71,11 +70,11 @@ public class Trasation {
         this.type = type;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

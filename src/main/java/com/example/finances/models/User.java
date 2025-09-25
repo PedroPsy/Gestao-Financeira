@@ -1,11 +1,9 @@
 package com.example.finances.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import java.util.UUID;
+import java.util.List;
+
 @Entity
 public class User {
     private String name;
@@ -14,9 +12,37 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Category> categories;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Trasation> transactions;
 
     public User(){
 
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public List<Category> getCategory() {
+        return categories;
+    }
+
+    public void setCategory(List<Category> category) {
+        this.categories = category;
+    }
+
+    public List<Trasation> getTransaction() {
+        return transactions;
+    }
+
+    public void setTransaction(List<Trasation> transactions) {
+        this.transactions = transactions;
     }
 
     public String getName() {
