@@ -5,7 +5,6 @@ import com.example.finances.dto.UserDto;
 import com.example.finances.models.User;
 import com.example.finances.service.UserService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -33,7 +32,7 @@ public class UserController {
         return userService.findAll()
                 .stream()
                 .map(this::convertToDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/users/{userId}")
