@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -29,14 +30,14 @@ public class UserController {
 
     @GetMapping(path = "/users")
     List<UserDTOResponse> listUsers(){
-        List<UserDTOResponse> list = userService.findAll().stream()
+        return userService.findAll()
+                .stream()
                 .map(this::convertToDTO)
                 .toList();
-        return list;
     }
 
     @GetMapping("/users/{userId}")
-    public UserDTOResponse getUser(@PathVariable @Min(4) Long userId){
+    public UserDTOResponse getUser(@PathVariable Long userId){
         User user = userService.getUser(userId);
         System.out.println(user.toString());
         return convertToDTO(user);
@@ -51,7 +52,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{userId}")
-    public UserDTOResponse updateTask(@PathVariable Long userId, @RequestBody UserDto userDTO){
+    public UserDTOResponse updateUser(@PathVariable Long userId, @RequestBody UserDto userDTO){
         User u = convertToEntity(userDTO);
         User userUpdated = userService.update(userId, u);
         return convertToDTO(userUpdated);

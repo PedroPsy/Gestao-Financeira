@@ -1,10 +1,7 @@
 package com.example.finances.controller;
 
-import com.example.finances.dto.CategoryDto;
 import com.example.finances.dto.TrasationDto;
-import com.example.finances.models.Category;
 import com.example.finances.models.Trasation;
-import com.example.finances.models.User;
 import com.example.finances.service.TrasationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -41,10 +38,10 @@ public class TrasationController {
 
 
     private TrasationDto convertToDTO(Trasation u) {
-        return modelMapper.map(u, CategoryDto.class);
+        return modelMapper.map(u, TrasationDto.class);
     }
     private Trasation convertToEntity(TrasationDto trasationDto) {
-        return modelMapper.map(trasationDto, Category.class);
+        return modelMapper.map(trasationDto, Trasation.class);
     }
 
 }
