@@ -1,8 +1,7 @@
 package com.example.finances.dto;
 
 import com.example.finances.models.User;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
 
 import java.time.LocalDateTime;
 
