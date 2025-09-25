@@ -14,7 +14,7 @@ public class CategoryDto {
     private String name;
     @NotNull
     @NotEmpty
-    private User user;
+    private Long userId;
 
     public CategoryDto() {}
 

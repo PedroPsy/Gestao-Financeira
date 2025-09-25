@@ -1,7 +1,6 @@
 package com.example.finances.service;
 
 import com.example.finances.models.Category;
-import com.example.finances.models.Trasation;
 import com.example.finances.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 

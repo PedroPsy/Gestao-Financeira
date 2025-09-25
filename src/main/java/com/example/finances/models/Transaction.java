@@ -1,21 +1,25 @@
-package com.example.finances.dto;
+package com.example.finances.models;
 
-import com.example.finances.models.User;
-
+import com.example.finances.enuns.TransactionType;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-public class TrasationDto {
+@Entity
+public class Transaction {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long transationId;
     private String description;
     private Double value;
     private LocalDateTime date;
-    private Enum type;
-
+    private TransactionType type;
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
     private User user;
     private Long categoryId;
 
-    public TrasationDto() {
+    public Transaction() {
 
     }
 
@@ -59,11 +63,11 @@ public class TrasationDto {
         this.date = date;
     }
 
-    public Enum getType() {
+    public TransactionType getType() {
         return type;
     }
 
-    public void setType(Enum type) {
+    public void setType(TransactionType type) {
         this.type = type;
     }
 

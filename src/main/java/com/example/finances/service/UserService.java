@@ -1,9 +1,8 @@
 package com.example.finances.service;
 
-import com.example.finances.models.Category;
 import com.example.finances.models.User;
 import com.example.finances.repository.CategoryRepository;
-import com.example.finances.repository.TrasationRepository;
+import com.example.finances.repository.TransactionRepository;
 import com.example.finances.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +12,11 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final TrasationRepository trasationRepository;
+    private final TransactionRepository transactionRepository;
     private final CategoryRepository categoryRepository;
-    public UserService(UserRepository userRepository, TrasationRepository trasationRepository, CategoryRepository categoryRepository) {
+    public UserService(UserRepository userRepository, TransactionRepository transactionRepository, CategoryRepository categoryRepository) {
         this.userRepository = userRepository;
-        this.trasationRepository = trasationRepository;
+        this.transactionRepository = transactionRepository;
         this.categoryRepository = categoryRepository;
     }
     public List<User> findAll() {

@@ -15,7 +15,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Category> categories;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Trasation> transactions;
+    private List<Transaction> transactions;
 
     public User(){
 
@@ -37,11 +37,11 @@ public class User {
         this.categories = category;
     }
 
-    public List<Trasation> getTransaction() {
+    public List<Transaction> getTransaction() {
         return transactions;
     }
 
-    public void setTransaction(List<Trasation> transactions) {
+    public void setTransaction(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 
