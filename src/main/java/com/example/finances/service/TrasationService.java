@@ -32,6 +32,9 @@ public class TrasationService {
     public void delete(Trasation trasation) {
         trasationRepository.delete(trasation);
     }
+    public void delete(Long id) {
+        trasationRepository.deleteById(id);
+    }
     public Trasation findById(Long id) {
         return trasationRepository.findById(id).orElse(null);
     }
