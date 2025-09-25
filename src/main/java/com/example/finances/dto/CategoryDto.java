@@ -1,18 +1,22 @@
-package com.example.finances.models;
+package com.example.finances.dto;
 
+import com.example.finances.models.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-@Entity
-public class Category {
+public class CategoryDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @NotEmpty
     private String name;
-    @ManyToOne()
-    @JoinColumn(name = "user_id")
+    @NotNull
+    @NotEmpty
     private User user;
 
-    public Category() {}
+    public CategoryDto() {}
 
     public Long getId() {
         return id;
