@@ -23,6 +23,10 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+    public User getUser(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        return user.get();
+    }
     public User save(User user) {
         return userRepository.save(user);
     }
