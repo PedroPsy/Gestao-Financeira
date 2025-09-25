@@ -22,16 +22,17 @@ public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-    public  UserController(UserService userService, ModelMapper modelMapper){
+    public  UserController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
     }
 
     @GetMapping(path = "/users")
     List<UserDTOResponse> listUsers(){
-        return userService.findAll().stream()
+        List<UserDTOResponse> list = userService.findAll().stream()
                 .map(this::convertToDTO)
                 .toList();
+        return list;
     }
 
     @GetMapping("/users/{userId}")
@@ -43,7 +44,7 @@ public class UserController {
 
 
     @PostMapping(path = "/users")
-    UserDTOResponse createUser(@Valid @RequestBody UserDto userDTO){
+    public UserDTOResponse createUser(@Valid @RequestBody UserDto userDTO){
         User u = convertToEntity(userDTO);
         User saved = userService.save(u);
         return convertToDTO(saved);
