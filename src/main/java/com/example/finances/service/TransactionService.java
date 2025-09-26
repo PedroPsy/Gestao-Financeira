@@ -22,9 +22,10 @@ public class TransactionService {
         if(tra.isPresent()){
             Transaction transactionUp = tra.get();
             transactionUp.setType(transaction.getType());
-            transaction.setCategoryId(transaction.getCategoryId());
-            transaction.setDescription(transaction.getDescription());
-            transaction.setValue(transaction.getValue());
+            transactionUp.setCategoryId(transaction.getCategoryId());
+            transactionUp.setDescription(transaction.getDescription());
+            transactionUp.setValue(transaction.getValue());
+
             return transactionRepository.save(transactionUp);
         }
         return null;
