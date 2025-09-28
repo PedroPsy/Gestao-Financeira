@@ -17,7 +17,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({
             UserNotFoundException.class,
-            CategoryNotFound.class
+            CategoryNotFound.class,
+            ResourceNotFoundException.class,
     })
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse notFoundException(RuntimeException ex) {
