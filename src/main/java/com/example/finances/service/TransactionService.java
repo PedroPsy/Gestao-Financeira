@@ -3,8 +3,8 @@ package com.example.finances.service;
 import com.example.finances.exception.ResourceNotFoundException;
 import com.example.finances.models.Transaction;
 import com.example.finances.models.User;
-import com.example.finances.repository.CategoryRepository;
 import com.example.finances.repository.TransactionRepository;
+import com.example.finances.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,10 +12,14 @@ import java.util.Optional;
 @Service
 public class TransactionService {
     private final TransactionRepository transactionRepository;
-    public TransactionService(TransactionRepository transactionRepository, CategoryRepository categoryRepository) {
+    private final UserRepository userRepository;
+    public TransactionService(TransactionRepository transactionRepository, UserRepository userRepository) {
         this.transactionRepository = transactionRepository;
+        this.userRepository = userRepository;
     }
-    public Transaction create(Transaction transaction) {
+    public Transaction create(Transaction transaction, String username) {
+        User user = userRepository.findByName(username);
+        transaction.setUser(user);
         return transactionRepository.save(transaction);
     }
     public Transaction update(Long transationId, Transaction transaction) {

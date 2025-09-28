@@ -3,6 +3,7 @@ package com.example.finances.controller;
 import com.example.finances.dto.TransactionDto;
 import com.example.finances.models.Transaction;
 import com.example.finances.service.TransactionService;
+import org.springframework.security.core.Authentication;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +22,10 @@ public class TransactionController {
         return transaction;
     }
     @PostMapping("/transactions")
-    public Transaction createTrasation(@RequestBody TransactionDto transactionDto){
+    public Transaction createTrasation(@RequestBody TransactionDto transactionDto, Authentication authentication){
+        String username = authentication.getName();
         Transaction transaction = convertToEntity(transactionDto);
-        return transactionService.create(transaction);
+        return transactionService.create(transaction, username);
     }
     @PutMapping("/transactions/{id}")
     public Transaction updateTrasation(@PathVariable("id") Long id, @RequestBody TransactionDto transactionDto){
