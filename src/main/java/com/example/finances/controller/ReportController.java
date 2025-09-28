@@ -16,7 +16,7 @@ public class ReportController {
         this.reportService = reportService;
     }
 
-    @GetMapping("/balance/{userId}")
+    @GetMapping("/balance")
     public BalanceDto getBalance(@PathVariable Long userId) {
         return reportService.getBalanceByUser(userId);
     }
