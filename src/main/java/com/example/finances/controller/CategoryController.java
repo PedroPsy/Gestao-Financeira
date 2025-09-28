@@ -4,11 +4,10 @@ import com.example.finances.dto.CategoryDto;
 import com.example.finances.models.Category;
 import com.example.finances.models.User;
 import com.example.finances.service.CategoryService;
+import org.springframework.security.core.Authentication;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -23,9 +22,10 @@ public class CategoryController {
     }
 
     @PostMapping(path = "/categories")
-    public Category save(@RequestBody CategoryDto categoryDto) {
+    public Category save(@RequestBody CategoryDto categoryDto, Authentication authentication) {
+        String username = authentication.getName();
         Category category = modelMapper.map(categoryDto, Category.class);
-        return categoryService.createCategory(category);
+        return categoryService.createCategory(category, username);
     }
     @PutMapping("/categories/{id}")
     public Category update(@PathVariable("id") Long id, @RequestBody CategoryDto categoryDto) {

@@ -2,7 +2,9 @@ package com.example.finances.service;
 
 import com.example.finances.exception.CategoryNotFound;
 import com.example.finances.models.Category;
+import com.example.finances.models.User;
 import com.example.finances.repository.CategoryRepository;
+import com.example.finances.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -10,10 +12,14 @@ import java.util.Optional;
 @Service
 public class CategoryService {
     private CategoryRepository categoryRepository;
-    public CategoryService(CategoryRepository categoryRepository) {
+    private UserRepository userRepository;
+    public CategoryService(CategoryRepository categoryRepository,  UserRepository userRepository) {
         this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
     }
-    public Category createCategory(Category category) {
+    public Category createCategory(Category category, String username) {
+        User user = userRepository.findByName(username);
+        category.setUser(user);
         return categoryRepository.save(category);
     }
     public Category updateCategory(Long id, Category category) {
