@@ -4,10 +4,9 @@ import com.example.finances.dto.TransactionDto;
 import com.example.finances.models.Transaction;
 import com.example.finances.service.TransactionService;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class TransactionController {
     private TransactionService transactionService;
@@ -17,7 +16,7 @@ public class TransactionController {
         this.modelMapper = modelMapper;
     }
     @GetMapping("/transactions/{id}")
-    public Transaction getTrasation(@PathVariable Long id){
+    public Transaction getTrasation(@PathVariable("id") Long id){
         Transaction transaction = transactionService.getTrasationById(id);
         return transaction;
     }
@@ -27,12 +26,12 @@ public class TransactionController {
         return transactionService.create(transaction);
     }
     @PutMapping("/transactions/{id}")
-    public Transaction updateTrasation(@PathVariable Long id, @RequestBody TransactionDto transactionDto){
+    public Transaction updateTrasation(@PathVariable("id") Long id, @RequestBody TransactionDto transactionDto){
         Transaction transaction = convertToEntity(transactionDto);
         return transactionService.update(id, transaction);
     }
     @DeleteMapping("/transactions/{id}")
-    public void deleteTrasation(@PathVariable Long id){
+    public void deleteTrasation(@PathVariable("id") Long id){
         transactionService.delete(id);
     }
 

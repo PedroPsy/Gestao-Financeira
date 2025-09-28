@@ -6,7 +6,6 @@ import com.example.finances.models.User;
 import com.example.finances.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@Controller
+@RestController
 @RequestMapping(path = "/api")
 @Validated
 public class UserController {
@@ -36,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public UserDTOResponse getUser(@PathVariable Long userId){
+    public UserDTOResponse getUser(@PathVariable("userId") Long userId){
         User user = userService.getUser(userId);
         System.out.println(user.toString());
         return convertToDTO(user);
@@ -51,7 +50,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{userId}")
-    public UserDTOResponse updateUser(@PathVariable Long userId, @RequestBody UserDto userDTO){
+    public UserDTOResponse updateUser(@PathVariable("userId") Long userId, @RequestBody UserDto userDTO){
         User u = convertToEntity(userDTO);
         User userUpdated = userService.update(userId, u);
         return convertToDTO(userUpdated);
@@ -59,7 +58,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/users/{userId}")
-    public void deleteUser(@PathVariable Long userId){
+    public void deleteUser(@PathVariable("userId") Long userId){
         userService.delete(userId);
     }
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class CategoryController {
     private final CategoryService categoryService;
@@ -28,16 +28,16 @@ public class CategoryController {
         return categoryService.createCategory(category);
     }
     @PutMapping("/categories/{id}")
-    public Category update(@PathVariable Long id, @RequestBody CategoryDto categoryDto) {
+    public Category update(@PathVariable("id") Long id, @RequestBody CategoryDto categoryDto) {
         Category category = convertToEntity(categoryDto);
         return categoryService.updateCategory(id, category);
     }
     @DeleteMapping("/categories/{id}")
-    public void deleteCategory(@PathVariable Long id) {
+    public void deleteCategory(@PathVariable("id") Long id) {
         categoryService.deleteCategory(id);
     }
     @GetMapping("/categories/{id}")
-    public Category getCategory(@PathVariable Long id) {
+    public Category getCategory(@PathVariable("id") Long id) {
         return categoryService.getCategoryById(id);
     }
 

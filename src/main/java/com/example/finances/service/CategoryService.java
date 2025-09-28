@@ -17,9 +17,9 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
     public Category updateCategory(Long id, Category category) {
-        Category categoryUp = categoryRepository.findById(id).orElseThrow(()-> new CategoryNotFound("Category not found"));
+        Category categoryUp = categoryRepository.findById(id)
+                .orElseThrow(() -> new CategoryNotFound("Category not found"));
         categoryUp.setName(category.getName());
-        categoryUp.setId(category.getId());
         categoryUp.setUser(category.getUser());
         return categoryRepository.save(categoryUp);
     }

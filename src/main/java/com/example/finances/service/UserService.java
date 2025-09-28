@@ -1,6 +1,5 @@
 package com.example.finances.service;
 
-import com.example.finances.exception.ResourceNotFoundException;
 import com.example.finances.exception.UserNotFoundException;
 import com.example.finances.models.User;
 import com.example.finances.repository.CategoryRepository;
@@ -9,7 +8,6 @@ import com.example.finances.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
