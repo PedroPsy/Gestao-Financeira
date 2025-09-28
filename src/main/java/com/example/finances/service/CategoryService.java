@@ -1,5 +1,6 @@
 package com.example.finances.service;
 
+import com.example.finances.exception.CategoryNotFound;
 import com.example.finances.models.Category;
 import com.example.finances.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
@@ -16,27 +17,19 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
     public Category updateCategory(Long id, Category category) {
-        Optional<Category> ca = categoryRepository.findById(id);
-        if(ca.isPresent()){
-            Category categoryUp = ca.get();
-            categoryUp.setName(category.getName());
-            categoryUp.setId(category.getId());
-            categoryUp.setUser(category.getUser());
-            return categoryRepository.save(categoryUp);
-        }
-        return null;
+        Category categoryUp = categoryRepository.findById(id).orElseThrow(()-> new CategoryNotFound("Category not found"));
+        categoryUp.setName(category.getName());
+        categoryUp.setId(category.getId());
+        categoryUp.setUser(category.getUser());
+        return categoryRepository.save(categoryUp);
     }
-    public Category deleteCategory(Long id) {
-        Optional<Category> ca = categoryRepository.findById(id);
-        if(ca.isPresent()){
-            categoryRepository.delete(ca.get());
-            return ca.get();
-        }
-        return null;
+    public void deleteCategory(Long id) {
+        Category category = categoryRepository.findById(id).orElseThrow(()-> new CategoryNotFound("Category not found"));
+        categoryRepository.delete(category);
     }
 
     public Category getCategoryById(Long categoryId) {
-        return  categoryRepository.getOne(categoryId);
+        return  categoryRepository.findById(categoryId).orElseThrow(()-> new CategoryNotFound("Category not found"));
     }
 
 }
