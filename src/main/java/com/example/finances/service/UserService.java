@@ -1,5 +1,7 @@
 package com.example.finances.service;
 
+import com.example.finances.exception.ResourceNotFoundException;
+import com.example.finances.exception.UserNotFoundException;
 import com.example.finances.models.User;
 import com.example.finances.repository.CategoryRepository;
 import com.example.finances.repository.TransactionRepository;
@@ -23,23 +25,19 @@ public class UserService {
         return userRepository.findAll();
     }
     public User getUser(Long userId) {
-        Optional<User> user = userRepository.findById(userId);
-        return user.get();
+        return userRepository.findById(userId).orElseThrow(()-> new UserNotFoundException("User not found"));
     }
     public User save(User user) {
         return userRepository.save(user);
     }
     public User update(Long userId, User u) {
-        Optional<User> userOpt = userRepository.findById(userId);
-        if(userOpt.isPresent()){
-            User user = userOpt.get();
-            user.setEmail(u.getEmail());
-            user.setName(u.getName());
-            return userRepository.save(user);
-        }
-        return null;
+        User user = userRepository.findById(userId).orElseThrow(()-> new UserNotFoundException("User not found"));
+        user.setEmail(u.getEmail());
+        user.setName(u.getName());
+        return userRepository.save(user);
     }
     public void delete(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(()-> new UserNotFoundException("User not found"));
         userRepository.deleteById(userId);
     }
 
