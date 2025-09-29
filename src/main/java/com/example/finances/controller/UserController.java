@@ -41,13 +41,7 @@ public class UserController {
         return convertToDTO(user);
     }
 
-
-    @PostMapping(path = "/users")
-    public UserDTOResponse createUser(@Valid @RequestBody UserDto userDTO){
-        User u = convertToEntity(userDTO);
-        User saved = userService.save(u);
-        return convertToDTO(saved);
-    }
+    // O método PostMapping para criar usuário foi movido para o AuthController.
 
     @PutMapping("/users/{userId}")
     public UserDTOResponse updateUser(@PathVariable("userId") Long userId, @RequestBody UserDto userDTO){

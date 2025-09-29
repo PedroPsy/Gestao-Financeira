@@ -29,9 +29,9 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/login", "/api/change-password", "/api/users") // Adicione o endpoint aqui
+                        .requestMatchers("/api/auth/**") // Permite acesso público para login e registro
                         .permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()) // Exige autenticação para todas as outras rotas
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
