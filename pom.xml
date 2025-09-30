@@ -6,7 +6,7 @@
   <artifactId>finances</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>finances</name>
+  <username>finances</username>
   <description>Personal Finance API - Spring Boot skeleton</description>
   <properties>
     <java.version>17</java.version>

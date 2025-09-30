@@ -7,8 +7,6 @@ import com.example.finances.repository.CategoryRepository;
 import com.example.finances.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class CategoryService {
     private CategoryRepository categoryRepository;
@@ -18,7 +16,7 @@ public class CategoryService {
         this.userRepository = userRepository;
     }
     public Category createCategory(Category category, String username) {
-        User user = userRepository.findByName(username);
+        User user = userRepository.findByUsername(username);
         category.setUser(user);
         return categoryRepository.save(category);
     }

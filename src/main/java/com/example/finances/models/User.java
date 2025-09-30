@@ -1,5 +1,7 @@
 package com.example.finances.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -7,15 +9,18 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
-    private String name;
+    private String username;
     private String email;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Category> categories;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Transaction> transactions;
 
     public User(){
@@ -46,12 +51,12 @@ public class User {
         this.transactions = transactions;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

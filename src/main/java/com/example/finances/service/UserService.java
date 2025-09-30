@@ -8,7 +8,6 @@ import com.example.finances.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,7 +36,7 @@ public class UserService {
     public User update(Long userId, User u) {
         User user = userRepository.findById(userId).orElseThrow(()-> new UserNotFoundException("User not found"));
         user.setEmail(u.getEmail());
-        user.setName(u.getName());
+        user.setUsername(u.getUsername());
         return userRepository.save(user);
     }
     public void delete(Long userId) {

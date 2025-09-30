@@ -6,11 +6,11 @@ import com.example.finances.repository.UserRepository;
 import com.example.finances.service.ReportService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/api/reports")
 public class ReportController {
     private final ReportService reportService;
@@ -24,7 +24,7 @@ public class ReportController {
     @GetMapping("/balance")
     public BalanceDto getBalance(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User user = userRepository.findByName(userDetails.getUsername());
+        User user = userRepository.findByUsername(userDetails.getUsername());
         return reportService.getBalanceByUser(user.getId());
     }
 }

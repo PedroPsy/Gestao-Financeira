@@ -1,6 +1,7 @@
 package com.example.finances.models;
 
 import com.example.finances.enuns.TransactionType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ public class Transaction {
     private TransactionType type;
     @ManyToOne()
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
     private Long categoryId;
 

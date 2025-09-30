@@ -2,13 +2,13 @@
 classDiagram
     class User {
         +Long id
-        +String name
+        +String username
         +String email
         +String password
     }
     class Category {
         +Long id
-        +String name
+        +String username
         +User user
     }
     class Transaction {

@@ -6,12 +6,12 @@
 3. H2 Console: `/h2-console` (JDBC URL: `jdbc:h2:mem:financedb`)
 
 ## Auth
-- `POST /api/auth/register` `{ "name":"Pedro", "email":"pedro@mail.com", "password":"123456" }`
+- `POST /api/auth/register` `{ "username":"Pedro", "email":"pedro@mail.com", "password":"123456" }`
 - `POST /api/auth/login` `{ "email":"pedro@mail.com", "password":"123456" }` → returns `{ "token": "..." }`
 - Use header: `Authorization: Bearer <token>`
 
 ## Categories
-- `POST /api/categories` `{ "name": "Alimentação" }`
+- `POST /api/categories` `{ "username": "Alimentação" }`
 - `GET /api/categories`
 
 ## Transactions
