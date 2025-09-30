@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Serviço/Contêiner para a sua API Spring Boot
+  app:
+    # Constrói a imagem a partir do Dockerfile na pasta atual (.)
+    build: .
+    # Mapeia a porta 8080 do contêiner para a porta 8080 da sua máquina.
+    ports:
+      - "8080:8080"
+    # Define as variáveis de ambiente que vão sobrescrever o application.properties.
+    # Isso faz com que a API se conecte ao contêiner do banco de dados, não ao 'localhost'.
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/gestaoFinanceira
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=0000
+      - JWT_SECRET=FinalProjectDesenvolvimentoDeSofwaresCoorporativos
+      - JWT_EXPIRATION=3600000
+    # Garante que o serviço 'app' só vai iniciar depois que o serviço 'db' estiver pronto.
+    depends_on:
+      - db
+
+  # Serviço/Contêiner para o Banco de Dados PostgreSQL
+  db:
+    # Usa a imagem oficial do PostgreSQL.
+    image: postgres:latest
+    # Define as variáveis de ambiente para configurar o banco de dados.
+    # Devem ser as mesmas usadas pela sua aplicação.
+    environment:
+      - POSTGRES_DB=gestaoFinanceira
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=0000
+    # Mapeia a porta 5432 do contêiner para a porta 5433 da sua máquina.
+    # Usamos 5433 para não dar conflito com um possível PostgreSQL já instalado na sua máquina.
+    ports:
+      - "5433:5432"
+    # (Opcional, mas recomendado) Cria um volume para persistir os dados do banco.
+    # Mesmo que você remova o contêiner, os dados não serão perdidos.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+# Define o volume que será usado pelo serviço 'db'.
+volumes:
+  postgres_data:

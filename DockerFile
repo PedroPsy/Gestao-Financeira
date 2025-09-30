@@ -1,0 +1,11 @@
+FROM openjdk:17-jdk-slim
+
+# Define um argumento para o caminho do arquivo JAR que será gerado pelo Maven.
+ARG JAR_FILE=target/finances-0.0.1-SNAPSHOT.jar
+
+# Copia o arquivo .jar da sua máquina para dentro da imagem Docker com o nome 'app.jar'.
+COPY ${JAR_FILE} app.jar
+
+# Define o comando que será executado quando o contêiner iniciar.
+# Isso é o mesmo que executar 'java -jar app.jar' no terminal.
+ENTRYPOINT ["java","-jar","/app.jar"]
