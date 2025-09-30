@@ -6,7 +6,6 @@
   <artifactId>finances</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <username>finances</username>
   <description>Personal Finance API - Spring Boot skeleton</description>
   <properties>
     <java.version>17</java.version>
@@ -83,6 +82,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>2.5.0</version>
     </dependency>
   </dependencies>
   <build>
